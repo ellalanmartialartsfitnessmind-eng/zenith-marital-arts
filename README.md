@@ -22,8 +22,6 @@ The app is a single-page React site with client-side routing. Key sections and f
 - `/enquiry` Enquiry form
 - `/sitemap` HTML sitemap
 
-Admin pages exist in `src/pages/AdminLogin.tsx` and `src/pages/AdminDashboard.tsx` but are not currently routed (see `src/App.tsx`).
-
 ## Data Sources
 
 - Events: Google Apps Script endpoint configured in `src/pages/Events.tsx`.

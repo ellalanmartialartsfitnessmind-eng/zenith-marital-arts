@@ -43,12 +43,36 @@ const Enquiry = () => {
   });
 
   const onSubmit = async (data: EnquiryFormData) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Form submitted:", data);
-    toast.success("Thank you for your enquiry! We'll be in touch soon.");
-    setIsSubmitted(true);
-    reset();
+    try {
+      const payload = {
+        fullName: data.name,
+        emailID: data.email,
+        mobNum: data.phone,
+        ageGroup: data.age,
+        class: data.classType,
+        message: data.message || "",
+      };
+
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbz3OruCu4_4Yq9ux7FfXBcfB-B6b5w1hC7iDFkqU9f7NDCZetQu1n3t5flTSsvJ0lE6/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      console.log("Form submitted:", data);
+      toast.success("Thank you for your enquiry! We'll be in touch soon.");
+      setIsSubmitted(true);
+      reset();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Failed to submit enquiry. Please try again.");
+    }
   };
 
   return (
